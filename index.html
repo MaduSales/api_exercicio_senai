@@ -3,20 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API de Livros</title>
+    <title>API de Tempo</title>
 </head>
 <body>
     <main>
-        <h1>Seja bem vindo(a) à API</h1>
+        <h1>Seja bem vindo(a) à API de Tempo</h1>
 
     <form class="search">
-        <label for="searchBook">Digite um título de livro</label>
-        <input id="searchBook" type="search" placeholder="Digite o título de um livro">
-        <button id="btn" type="submit">Pesquisar</button>
+        <label for="searchLabel">Digite uma cidade</label>
+        <input id="searchLocal" type="search" placeholder="Ex: São Paulo">
+        <button id="btn" type="submit" onclick="searchCity()">Pesquisar</button>
+
+        <div class="resultSearch">
+            <p id="temperature"></p>
+            <p id="weather"></p>
+        </div>  
+        
+        <div class="aditionalInfo">
+            <p id="city"></p>
+            <p id="weather"></p>
+            <p id="humidity"></p>
+        </div> 
     </form>
-    <div class="resultSearch">
-        <p id="result"></p>
-    </div>
+    <script src="script.js"></script>
     </main>
 </body>
 </html>
