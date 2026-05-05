@@ -13,6 +13,14 @@ async function searchCity(e) {
     e.preventDefault();
     try{
         let local = searchLocal.value;
+        if (local == ""){
+            resultBox.classList.remove("hidden");
+            resultSearch.innerHTML = "Insira uma cidade!";
+            temperature.innerHTML = "";
+            weather.innerHTML = "";
+            humidity.innerHTML = "";
+            return
+        } 
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${local}&appid=${apiKey}&lang=pt_br&units=metric`);
         const data = await response.json();
         
