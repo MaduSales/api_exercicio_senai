@@ -21,30 +21,40 @@ async function searchCity(e) {
             humidity.innerHTML = "";
             return
         } 
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${local}&appid=${apiKey}&lang=pt_br&units=metric`);
-        const data = await response.json();
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${local}&appid=${apiKey}&lang=pt_br&units=metric`);        
         
-        //Limpa conteúdo do elemento para não ser duplicado
-        humidity.innerHTML = "";
+        if (response.status == 200){
+            const data = await response.json();
+            
+            //Limpa conteúdo do elemento para não ser duplicado
+            humidity.innerHTML = "";
 
-        //Criando elemento imagem
-        const imgForecast = document.createElement("img");
+            //Criando elemento imagem
+            const imgForecast = document.createElement("img");
 
-        //Exibindo dinamicamente
-        resultSearch.innerHTML = `Tempo em ${data.name}`;
-        temperature.innerHTML = Math.floor(data.main.temp) + " C°";
-        weather.innerHTML = data.weather[0].description;
+            //Exibindo dinamicamente
+            resultSearch.innerHTML = `Tempo em ${data.name}`;
+            temperature.innerHTML = Math.floor(data.main.temp) + " C°";
+            weather.innerHTML = data.weather[0].description;
 
-        //Realizando atribuições do elemento criado
-        imgForecast.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-        imgForecast.alt = "Weather icon";
-        imgForecast.className = "mx-auto w-20 h-20";
-        humidity.appendChild(imgForecast); //Inserindo imagem dentro do elemento
+            //Realizando atribuições do elemento criado
+            imgForecast.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+            imgForecast.alt = "Weather icon";
+            imgForecast.className = "mx-auto w-20 h-20";
+            humidity.appendChild(imgForecast); //Inserindo imagem dentro do elemento
 
-        //Adicionando informações abaixo da imagem
-        humidity.append(`Umidade: ${data.main.humidity}%`);
-        resultBox.classList.remove("hidden");
-        searchLocal.value = "";
+            //Adicionando informações abaixo da imagem
+            humidity.append(`Umidade: ${data.main.humidity}%`);
+            resultBox.classList.remove("hidden");
+            searchLocal.value = "";
+        } else{
+            resultBox.classList.remove("hidden");
+            resultSearch.innerHTML = "Dados não encontrados. <br> Insira outro local.";
+            temperature.innerHTML = "";
+            weather.innerHTML = "";
+            humidity.innerHTML = "";
+            return
+        }
 
     }catch (error){
         console.log("Erro: ", error)
