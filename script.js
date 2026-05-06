@@ -53,6 +53,7 @@ async function searchCity(e) {
             temperature.innerHTML = "";
             weather.innerHTML = "";
             humidity.innerHTML = "";
+            searchLocal.value = "";
             return
         }
 
